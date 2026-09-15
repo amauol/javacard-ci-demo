@@ -1,0 +1,2 @@
+#Exclure le SDK Java Card et la documentation externe 
+tools/jcdk/

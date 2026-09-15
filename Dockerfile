@@ -24,4 +24,8 @@ COPY scripts/run_tests.sh /usr/local/bin/run_tests.sh
 RUN chmod +x /usr/local/bin/run_tests.sh
 
 WORKDIR /workspace
+
+RUN useradd -m appuser
+USER appuser
+
 CMD ["/bin/bash"]
