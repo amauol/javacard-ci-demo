@@ -49,5 +49,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: javacard-cap
-          path: ./scripts/build/*.cap
+          path: build/cap/fr/insa/javacard/*.cap
 
