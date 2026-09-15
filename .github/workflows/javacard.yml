@@ -44,3 +44,10 @@ jobs:
         run: |
           chmod +x scripts/run_tests.sh
           ./scripts/run_tests.sh
+
+      - name: Upload CAP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: javacard-cap
+          path: ./scripts/build/*.cap
+
