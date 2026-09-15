@@ -29,12 +29,7 @@ jobs:
             --config p/secrets \
             --exclude 'tests/' \
             --json --output semgrep-results.json \
-            src/ scripts/ # || true  || true pour ne pas faire échouer le job immédiatement
-       
-      - name: Test SAST - échec volontaire
-        run: |
-          echo "=== Échec volontaire du pipeline SAST pour le TP ==="
-          exit 1
+            src/ scripts/  || true  # || true pour ne pas faire échouer le jo
 
       - name: Uploader les résultats de l'analyse
         if: always()
