@@ -27,8 +27,3 @@ jobs:
           severity: CRITICAL,HIGH
           exit-code: '1'
           ignore-unfixed: true
-
-      - name: Test volontairement échoué
-        run: |
-          echo "Échec volontaire du contrôle Trivy pour tester le pipeline"
-          exit 1
