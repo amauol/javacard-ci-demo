@@ -29,6 +29,6 @@ jobs:
           ignore-unfixed: true
 
       - name: Test volontairement échoué
-          run: |
-            echo "Échec volontaire du contrôle Trivy pour tester le pipeline"
-            exit 1
+        run: |
+          echo "Échec volontaire du contrôle Trivy pour tester le pipeline"
+          exit 1
