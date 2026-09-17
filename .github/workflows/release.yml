@@ -1,0 +1,50 @@
+name: CD - GitHub Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build CAP and create GitHub Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Installer les dépendances
+        run: |
+          sudo apt update
+          sudo apt install -y gcc-multilib libpcsclite1 pcsc-tools wget unzip
+
+      - name: Configurer Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Configurer le JCDK
+        run: |
+          echo "JC_HOME=$PWD/tools/jcdk" >> $GITHUB_ENV
+          echo "PATH=$PWD/tools/jcdk/bin:$PATH" >> $GITHUB_ENV
+
+      - name: Télécharger ECJ
+        run: |
+          mkdir -p lib
+          wget -O lib/ecj.jar             https://repo.maven.apache.org/maven2/org/eclipse/jdt/ecj/3.33.0/ecj-3.33.0.jar
+
+      - name: Construire le CAP
+        run: |
+          chmod +x scripts/build.sh
+          ./scripts/build.sh
+
+      - name: Créer la GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/cap/fr/insa/javacard/*.cap
+          generate_release_notes: true
