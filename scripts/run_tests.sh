@@ -20,7 +20,7 @@ sleep 3
 echo "🔬 Exécution de l'upload (cap-download)..."
 apdutool /tmp/load.scr > /tmp/load.out 2>&1
 
-if grep -q "SW1: 90, SW2: 00" ; then
+if grep -q "SW1: 90, SW2: 00" /tmp/load.out; then
     echo "✅ Chargement du code réussi"
 else
     echo "❌ Échec du chargement du code. Détails :"
@@ -72,7 +72,7 @@ for test_script in tests/apdu/*.scr; do
     apdutool "$test_script" > /tmp/out.txt 2>&1
     LAST_APDU=$(grep "CLA:" /tmp/out.txt | tail -n 1)
 
-    if echo "$LAST_APDU" |grep -q "SW1: 90, SW2: 00" /tmp/out.txt; then
+    if echo "$LAST_APDU" |grep -q "SW1: 90, SW2: 00"; then
         echo "✅ PASS"
     else
         echo "❌ FAIL"
